@@ -1,12 +1,21 @@
+const {
+    addBookHandler,
+} = require("./handler");
+
 const routes = [
     {
         method: 'GET',
         path:'/hello',
-        handler: (request, h) => {
-    
-          return 'Hello World!';
+        handler: () => {
+            return 'Hello World!';
         }
     },
+    {
+        method: 'POST',
+        path:'/books',
+        handler: addBookHandler,
+    },
+
 ]
 
 module.exports = routes;
