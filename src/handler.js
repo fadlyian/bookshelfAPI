@@ -1,6 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-console */
-/* eslint-disable max-len */
 const { nanoid } = require('nanoid');
 const books = require('./books');
 
@@ -28,7 +25,7 @@ const addBookHandler = (request, h) => {
   }
 
   const id = nanoid(16);
-  const finished = (readPage === pageCount);
+  const finished = (readPage == pageCount);
   const insertedAt = new Date().toISOString();
   const updatedAt = insertedAt;
 
@@ -50,7 +47,6 @@ const addBookHandler = (request, h) => {
   books.push(newBook);
 
   const isSuccess = books.filter((book) => book.id === id).length > 0;
-  // const nameSuccess = books.filter((book) => book.nama === null);
 
   if (isSuccess) {
     const response = h.response({
@@ -84,11 +80,11 @@ const getAllBooksHandler = (request, h) => {
     }
 
     if (reading) {
-      booksWithFilter = booksWithFilter.filter((book) => book.reading === Number(reading));
+      booksWithFilter = booksWithFilter.filter((book) => book.reading == Number(reading));
     }
 
     if (finished) {
-      booksWithFilter = booksWithFilter.filter((book) => book.finished === Number(reading));
+      booksWithFilter = booksWithFilter.filter((book) => book.finished == Number(finished));
     }
 
     const response = h.response({
@@ -147,9 +143,9 @@ const editBookByIdHandler = (request, h) => {
   const {
     name, year, author, summary, publisher, pageCount, readPage, reading,
   } = request.payload;
-  const index = books.findIndex((book) => book.id === id);
+  const index = books.findIndex((book) => book.id == id);
 
-  if (index !== -1) {
+  if (index > -1) {
     if (!name) {
       const response = h.response({
         status: 'fail',
@@ -203,7 +199,7 @@ const editBookByIdHandler = (request, h) => {
 const deleteBooksById = (request, h) => {
   const { id } = request.params;
 
-  const index = books.findIndex((book) => book.id === id)[0];
+  const index = books.findIndex((book) => book.id === id);
 
   if (index > -1) {
     books.splice(index, 1);
